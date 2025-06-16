@@ -3,7 +3,7 @@ import colors from "./colors";
 
 const typographyStyles = StyleSheet.create({
   h1: {
-    fontWeight: "400",
+    fontWeight: "700",
     fontSize: 38,
     lineHeight: 38,
     color: colors.secondaryText,
