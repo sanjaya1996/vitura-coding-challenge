@@ -1,6 +1,7 @@
 import PrescriptionListItem from "@/components/PrescriptionListItem";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { fetchPrescriptions } from "@/store/thunks/prescriptionThunks";
+import colors from "@/styles/colors";
 import React, { useEffect } from "react";
 import {
   ActivityIndicator,
@@ -43,7 +44,7 @@ const Prescriptions: React.FC<Props> = () => {
         loadingList ? (
           <ActivityIndicator
             size="large"
-            color="#0000ff"
+            color={colors.primaryOrange}
             style={styles.container}
           />
         ) : (

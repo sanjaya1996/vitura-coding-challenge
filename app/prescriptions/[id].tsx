@@ -25,7 +25,7 @@ export default function PrescriptionDetail() {
   if (loadingDetails) {
     return (
       <View style={styles.centered}>
-        <ActivityIndicator size="large" color={colors.accent} />
+        <ActivityIndicator size="large" color={colors.primaryOrange} />
         <Text type="smallBody">Loading prescription...</Text>
       </View>
     );
