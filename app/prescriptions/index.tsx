@@ -1,13 +1,20 @@
+import PrescriptionListItem from "@/components/PrescriptionListItem";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { fetchPrescriptions } from "@/store/thunks/prescriptionThunks";
 import React, { useEffect } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import {
+  ActivityIndicator,
+  FlatList,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 
 type Props = {};
 
 const Prescriptions: React.FC<Props> = () => {
   const dispatch = useAppDispatch();
-  const { prescriptions, loading, error } = useAppSelector(
+  const { prescriptions, loadingList, errorList } = useAppSelector(
     (state) => state.prescriptions
   );
 
@@ -15,10 +22,37 @@ const Prescriptions: React.FC<Props> = () => {
     dispatch(fetchPrescriptions());
   }, [dispatch]);
 
+  if (loadingList) {
+    return (
+      <ActivityIndicator
+        size="large"
+        color="#0000ff"
+        style={styles.container}
+      />
+    );
+  }
+
   return (
-    <View style={styles.container}>
-      <Text>Prescriptions</Text>
-    </View>
+    <FlatList
+      data={prescriptions}
+      keyExtractor={(item) => item.id.toString()}
+      renderItem={({ item }) => <PrescriptionListItem item={item} />}
+      contentContainerStyle={{ padding: 16 }}
+      showsVerticalScrollIndicator={false}
+      ListEmptyComponent={
+        loadingList ? (
+          <ActivityIndicator
+            size="large"
+            color="#0000ff"
+            style={styles.container}
+          />
+        ) : (
+          <View style={styles.container}>
+            <Text>{errorList || "No prescriptions found."}</Text>
+          </View>
+        )
+      }
+    />
   );
 };
 

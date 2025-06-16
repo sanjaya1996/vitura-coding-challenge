@@ -1,3 +1,4 @@
+import colors from "@/styles/colors";
 import { Stack } from "expo-router";
 
 export default function RootStack() {
@@ -7,7 +8,7 @@ export default function RootStack() {
         name="index"
         options={{
           title: "Welcome",
-          headerStyle: { backgroundColor: "rgb(239, 90, 33)" },
+          headerStyle: { backgroundColor: colors.primaryOrange },
           headerTintColor: "#fff",
           headerTitleStyle: { fontWeight: "bold" },
         }}
@@ -16,7 +17,7 @@ export default function RootStack() {
         name="prescriptions/index"
         options={{
           title: "Prescriptions",
-          headerStyle: { backgroundColor: "rgb(239, 90, 33)" },
+          headerStyle: { backgroundColor: colors.primaryOrange },
           headerTintColor: "#fff",
           headerTitleStyle: { fontWeight: "bold" },
         }}
@@ -25,8 +26,8 @@ export default function RootStack() {
         name="prescriptions/[id]"
         options={({ route }) => ({
           title: "Prescription",
-          headerStyle: { backgroundColor: "rgb(239, 90, 33)" },
-          headerTintColor: "#fff",
+          headerStyle: { backgroundColor: colors.primaryOrange },
+          headerTintColor: colors.white,
           headerTitleStyle: { fontWeight: "bold" },
         })}
       />
