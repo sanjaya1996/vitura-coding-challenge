@@ -1,5 +1,5 @@
 import { Prescription } from "@/store/slices/prescriptionSlice";
-import React from "react";
+import React, { useCallback } from "react";
 import { Pressable, StyleSheet } from "react-native";
 
 import constants from "@/styles/constants";
@@ -10,12 +10,12 @@ type Props = {
   item: Prescription;
 };
 
-const PrescriptionListItem: React.FC<Props> = ({ item }) => {
+const PrescriptionListItem: React.FC<Props> = React.memo(({ item }) => {
   const { medication, patient, status, id } = item;
 
-  const handlePress = () => {
+  const handlePress = useCallback(() => {
     router.push(`/prescriptions/${id}`);
-  };
+  }, [id]);
   return (
     <Pressable style={styles.container} onPress={handlePress}>
       <Text type="smallBodyBold">{patient}</Text>
@@ -23,7 +23,7 @@ const PrescriptionListItem: React.FC<Props> = ({ item }) => {
       <Text type="label">{`Status: ${status.toUpperCase()}`}</Text>
     </Pressable>
   );
-};
+});
 
 const styles = StyleSheet.create({
   container: {
@@ -34,5 +34,7 @@ const styles = StyleSheet.create({
     gap: constants.space.xs,
   },
 });
+
+PrescriptionListItem.displayName = "PrescriptionListItem";
 
 export default PrescriptionListItem;
