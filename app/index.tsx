@@ -1,13 +1,20 @@
 import ButtonPrimary from "@/components/common/ButtonPrimary";
+import Text from "@/components/common/Text";
+import colors from "@/styles/colors";
+import constants from "@/styles/constants";
 import { useRouter } from "expo-router";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 
 export default function Index() {
   const router = useRouter();
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Welcome to Vitura</Text>
-      <Text style={styles.subtitle}>Manage your prescriptions with ease</Text>
+      <Text type="h1" style={styles.title}>
+        Welcome to Vitura
+      </Text>
+      <Text type="smallBody" style={styles.subtitle}>
+        Manage your prescriptions with ease
+      </Text>
 
       <ButtonPrimary
         label="View Prescriptions"
@@ -23,35 +30,15 @@ const styles = StyleSheet.create({
     backgroundColor: "#F5F5F5",
     alignItems: "center",
     justifyContent: "center",
-    padding: 24,
+    padding: constants.space.lg,
   },
   title: {
-    fontSize: 32,
-    fontWeight: "bold",
-    color: "#EF5A21",
+    color: colors.primaryOrange,
     marginBottom: 12,
     textAlign: "center",
   },
   subtitle: {
-    fontSize: 16,
-    color: "#333",
-    marginBottom: 32,
+    marginBottom: constants.space.xl,
     textAlign: "center",
-  },
-  button: {
-    backgroundColor: "#EF5A21",
-    paddingVertical: 14,
-    paddingHorizontal: 24,
-    borderRadius: 10,
-    elevation: 3,
-    shadowColor: "#000",
-    shadowOpacity: 0.1,
-    shadowRadius: 5,
-    shadowOffset: { width: 0, height: 2 },
-  },
-  buttonText: {
-    color: "#fff",
-    fontSize: 16,
-    fontWeight: "600",
   },
 });
