@@ -1,9 +1,12 @@
 import RadioButtonGroup from "@/components/common/RadioButonGroup";
+import SearchBar from "@/components/common/SearchBar";
 import PrescriptionListItem from "@/components/PrescriptionListItem";
+import SortAndClearControls from "@/components/prescriptions/SortAndClearControls";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { fetchPrescriptions } from "@/store/thunks/prescriptionThunks";
 import colors from "@/styles/colors";
 import constants from "@/styles/constants";
+import array from "@/utils/array";
 import React, { useEffect, useMemo, useState } from "react";
 import {
   ActivityIndicator,
@@ -22,15 +25,34 @@ const Prescriptions: React.FC<Props> = () => {
   );
 
   const [filter, setFilter] = useState<string>("all");
+  const [searchQuery, setSearchQuery] = useState<string>("");
+  const [sortOrder, setSortOrder] = useState<"newest" | "oldest" | null>(null);
 
   const filteredPrescriptions = useMemo(() => {
-    if (filter === "all") return prescriptions;
-    return prescriptions.filter((p) => p.status === filter);
-  }, [prescriptions, filter]);
+    let base =
+      filter === "all"
+        ? prescriptions
+        : prescriptions.filter((p) => p.status === filter);
+
+    if (searchQuery.trim()) {
+      base = array.searchList(base, searchQuery, ["medication", "patient"]);
+    }
+
+    if (!sortOrder) {
+      return base;
+    }
+    return array.sortByDate([...base], "datePrescribed", sortOrder);
+  }, [prescriptions, filter, searchQuery, sortOrder]);
 
   useEffect(() => {
     dispatch(fetchPrescriptions());
   }, [dispatch]);
+
+  const clearFilters = () => {
+    setFilter("all");
+    setSearchQuery("");
+    setSortOrder(null);
+  };
 
   if (loadingList) {
     return (
@@ -53,6 +75,17 @@ const Prescriptions: React.FC<Props> = () => {
         ]}
         selected={filter}
         onSelect={(value) => setFilter(value)}
+      />
+      <SearchBar
+        value={searchQuery}
+        placeholder="Search medication or patient"
+        debounceDelay={300}
+        onSearch={(searchQuery) => setSearchQuery(searchQuery)}
+      />
+      <SortAndClearControls
+        sortOrder={sortOrder}
+        onChangeSort={(order) => setSortOrder(order)}
+        onClear={clearFilters}
       />
       <FlatList
         data={filteredPrescriptions}
