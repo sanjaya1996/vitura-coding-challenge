@@ -1,6 +1,6 @@
 # Vitura Prescription Management App
 
-This is a React Native app built with Expo and `expo-router` for Vitura's coding challenge. It allows users to view, search, filter, and sort a list of prescriptions and view details about each one.
+This is a React Native app built with Expo and the latest `react-navigation` for Vitura's coding challenge. It allows users to view, search, filter, and sort a list of prescriptions and view details about each one.
 
 <p align="center">
   <img src="assets/screenshots/Screenshot1.png" alt="Screenshot 1" width="220" style="margin-right: 10px;" />
@@ -11,10 +11,9 @@ This is a React Native app built with Expo and `expo-router` for Vitura's coding
 
 - **React Native** – Cross-platform mobile app development
 - **Expo** – Simplifies React Native development, testing, and deployment
-- **Expo Router** – File-based routing and navigation for React Native apps
 - **Redux Toolkit** – Simplified and scalable global state management
 - **TypeScript** – Type-safe codebase for improved developer experience and maintainability
-- **React Navigation (via Expo Router)** – Navigation between screens, including dynamic routes
+- **React Navigation v7** – Typed and modular navigation library (replaces `expo-router`)
 
 ---
 
@@ -59,14 +58,55 @@ Link: https://expo.dev/accounts/shawn-j/projects/vitura-coding-challenge/updates
 
 ---
 ## 📐 Architecture & State Approach
-This project follows a modular and scalable architecture designed for maintainability, clarity and testability.
-- Screens are located inside the `/app` folder following **Expo Router's file-based routing**.
-- Navigation is handled using **Expo Router's Stack** with **dynamic routes** for the prescription detail view.
+
+The project follows a modular and scalable folder structure for clarity and maintainability:
+
+```text
+├── assets/                          # App icons, images, screenshots
+
+├── src/
+│   ├── components/                  # Reusable UI components
+│   │   ├── common/                  # Shared, generic components (e.g., Text, Button)
+│   │   └── feature-specific/        # Feature-level components (e.g., FilterControls)
+│   │       └── ComponentName.test.tsx   # Unit tests for components (NA)
+│
+│   ├── data/                        # Static or mock data
+│   │   └── prescriptions.ts         # Example prescriptions data (mocked)
+│
+│   ├── navigation/                  # React Navigation setup
+│   │   └── RootNavigator            # Rootnavigator config (Navigator, screens, types)
+│   │   └── index.tsx                # NavigationContainer
+│
+│   ├── screens/                     # App screens
+│   │   ├── HomeScreen.tsx           
+│   │   ├── Prescriptions.tsx        
+│   │   ├── PrescriptionDetails.tsx  
+│
+│   ├── store/                       # Redux Toolkit store
+│   │   ├── slices/                  # Redux slices (e.g., prescriptionsSlice)
+│   │   └── thunks/                  # Async thunks for data fetching
+│
+│   ├── styles/                      # Centralized styling system
+│   │   ├── colors.ts                # App color palette
+│   │   ├── constants.ts             # Spacing, font-size
+│   │   ├── typography.ts            # Text types 
+│
+│   ├── utils/                      # Utility and helper functions
+│       └── math/                    # Math-related utilities
+│           ├── index.ts
+│           └── index.test.ts        # (NA)
+
+├── App.tsx                          # App entry point, registered via registerRootComponent
+├── package.json                     # Project config and dependencies
+```
+
+- Navigation is handled using **react-navigation** with stack navigator approach and full type-safety.
 - **State Management** is powered by **Redux Toolkit**:
   - `prescriptionsSlice` manages both the list of prescriptions and individual prescription details.
   - Async thunks simulate API calls using local static JSON data.
-- UI components are organized and reused via a `components/` folder.
-- Styling is standardized using a `constants.ts` file for **spacing and colors**, promoting consistent design throughout the app.
+  - Uses React Hooks (useState, useEffect) for local state.
+  - UI components are organized and reused via a `components/` folder. They are clean and focused only on rendering components
+  - Styling is standardized using a `src/styles` folder for **fonts, colors, spacing and typography**, promoting consistent design throughout the app.
 
 
 ## 🤔 Assumptions Made
@@ -77,7 +117,7 @@ This project follows a modular and scalable architecture designed for maintainab
     - Prescription `status` will only be one of: `"active"`, `"expired"`, or `"pending"` 
 
 - 🧭 **Navigation Structure**:
-  - Expo Router is used instead of `react-navigation` to quickly get started
+  - `react-navigation V7` is being used for the navigation 
 
 - 🧠 **State Management**:
   - Redux Toolkit is used to manage global state.
@@ -111,34 +151,8 @@ This project follows a modular and scalable architecture designed for maintainab
 
 The project follows a modular and scalable folder structure for clarity and maintainability:
 
-```text
-├── app/                             # Screens and routes (expo-router structure)
-│   └── prescriptions/               # Screens under /prescriptions route
-│       ├── _layout.tsx              # Stack layout for prescriptions
-│       └── index.tsx                # Main prescriptions list screen
-│   └── index.tsx                    # Home screen
+## 📁 Folder Structure
 
-├── components/                      # Reusable UI components
-│   ├── common/                      # Shared, generic components (e.g., Text, Button)
-│   └── feature-specific/            # Feature-level components (e.g., FilterControls)
-│       └── ComponentName.test.tsx   # Unit tests for components (NA)
 
-├── data/                            # Static or mock data
-│   └── prescriptions.ts             # Example prescriptions data (mocked)
-
-├── store/                           # Redux Toolkit store
-│   ├── slices/                      # Redux slices (e.g., prescriptionsSlice)
-│   └── thunks/                      # Async thunks for data fetching (e.g., fetchPrescriptions)
-
-├── styles/                          # Centralized styling system
-│   ├── colors.ts                    # App color palette
-│   ├── constants.ts                 # Spacing, radius, breakpoints, etc.
-│   └── typography.ts                # Font sizes, weights, and styles
-
-├── utils/                           # Utility and helper functions
-│   └── math/                        # Math-related utilities
-│       ├── index.ts                 # Example: sorting or filtering functions
-│       └── index.test.ts            # Unit tests for math utilities (NA)
-```
 
 > 📌 **Note:** Each module is self-contained. This structure improves scalability, reusability, and testability across the project.
