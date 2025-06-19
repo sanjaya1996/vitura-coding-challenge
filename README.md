@@ -111,8 +111,9 @@ The project follows a modular and scalable folder structure for clarity and main
   - `prescriptionsSlice` manages both the list of prescriptions and individual prescription details.
   - Async thunks simulate API calls using local static JSON data.
   - Uses React Hooks (useState, useEffect) for local state.
-  - UI components are organized and reused via a `components/` folder. They are clean and focused only on rendering components
-  - Styling is standardized using a `src/styles` folder for **fonts, colors, spacing and typography**, promoting consistent design throughout the app.
+  
+- UI components are organized and reused via a `components/` folder. They are clean and focused only on rendering components
+- Styling is standardized using a `src/styles` folder for **fonts, colors, spacing and typography**, promoting consistent design throughout the app.
 
 
 ## 🤔 Assumptions Made
@@ -152,12 +153,6 @@ The project follows a modular and scalable folder structure for clarity and main
 
 
 ---
-
-## 📁 Folder Structure
-
-The project follows a modular and scalable folder structure for clarity and maintainability:
-
-## 📁 Folder Structure
 
 
 
