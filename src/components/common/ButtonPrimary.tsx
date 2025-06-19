@@ -1,5 +1,5 @@
-import colors from "@/styles/colors";
-import constants from "@/styles/constants";
+import colors from "@/src/styles/colors";
+import constants from "@/src/styles/constants";
 import React from "react";
 import { Pressable, StyleSheet, ViewStyle } from "react-native";
 import Text from "./Text";

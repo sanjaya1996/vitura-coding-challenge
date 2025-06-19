@@ -1,4 +1,4 @@
-import constants from "@/styles/constants";
+import constants from "@/src/styles/constants";
 import { Feather } from "@expo/vector-icons";
 import React, { useEffect, useState } from "react";
 import { StyleSheet, TextInput, View } from "react-native";
@@ -17,6 +17,10 @@ export default function SearchBar({
   debounceDelay = 0,
 }: Props) {
   const [inputValue, setInputValue] = useState(value);
+
+  useEffect(() => {
+    setInputValue(value);
+  }, [value]);
 
   useEffect(() => {
     if (debounceDelay > 0) {

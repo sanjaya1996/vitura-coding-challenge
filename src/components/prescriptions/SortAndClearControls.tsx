@@ -1,6 +1,6 @@
-import Text from "@/components/common/Text";
-import colors from "@/styles/colors";
-import constants from "@/styles/constants";
+import Text from "@/src/components/common/Text";
+import colors from "@/src/styles/colors";
+import constants from "@/src/styles/constants";
 import React from "react";
 import { Pressable, StyleSheet, View } from "react-native";
 

@@ -1,4 +1,4 @@
-import typographyStyles from "@/styles/typography";
+import typographyStyles from "@/src/styles/typography";
 import React from "react";
 import { Text as RNText, StyleSheet, TextProps } from "react-native";
 
