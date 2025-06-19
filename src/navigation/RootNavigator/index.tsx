@@ -11,8 +11,8 @@ export default function RootNavigator() {
       screenOptions={{
         headerShown: true,
         animation: "fade",
-        headerTintColor: colors.secondaryText,
-        headerStyle: { backgroundColor: colors.white },
+        headerTintColor: colors.white,
+        headerStyle: { backgroundColor: colors.primaryOrange },
       }}
     >
       {Object.entries({ ...RootStackScreens }).map(([name, Component]) => (
