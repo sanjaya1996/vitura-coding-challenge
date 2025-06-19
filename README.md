@@ -80,7 +80,7 @@ The project follows a modular and scalable folder structure for clarity and main
 │   │   └── prescriptions.ts         # Example prescriptions data (mocked)
 │
 │   ├── navigation/                  # React Navigation setup
-│   │   └── RootNavigator            # Rootnavigator config (Navigator, screens, types)
+│   │   └── RootNavigator/           # Rootnavigator config (Navigator, screens, types)
 │   │   └── index.tsx                # NavigationContainer
 │
 │   ├── screens/                     # App screens
@@ -98,7 +98,7 @@ The project follows a modular and scalable folder structure for clarity and main
 │   │   ├── typography.ts            # Text types 
 │
 │   ├── utils/                      # Utility and helper functions
-│       └── math/                    # Math-related utilities
+│       └── array/                    # Array-related utilities
 │           ├── index.ts
 │           └── index.test.ts        # (NA)
 
