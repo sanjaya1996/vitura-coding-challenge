@@ -53,6 +53,12 @@ Scan the QR code in your terminal or browser using **Expo GO**  on your mobile d
 
 ## 📱 Preview the App on Expo Go:
 
+Scan the following QR code to preview this update:
+
+![QR code](assets/screenshots/AppPreviewQRcode.png)
+
+Or follow the link below: 
+
 Link: https://expo.dev/accounts/shawn-j/projects/vitura-coding-challenge/updates/cc1b12cb-7787-4d2d-8be5-1a5ebdb9ad06
 
 
