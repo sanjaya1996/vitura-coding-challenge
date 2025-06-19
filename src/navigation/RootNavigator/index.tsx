@@ -15,11 +15,12 @@ export default function RootNavigator() {
         headerStyle: { backgroundColor: colors.primaryOrange },
       }}
     >
-      {Object.entries({ ...RootStackScreens }).map(([name, Component]) => (
+      {Object.entries(RootStackScreens).map(([name, { component, title }]) => (
         <RootStack.Screen
           key={name}
           name={name as keyof RootStackParamList}
-          component={Component as React.ComponentType<any>}
+          component={component}
+          options={{ title }}
         />
       ))}
     </RootStack.Navigator>

@@ -1,16 +1,27 @@
 import Home from "@/src/screens/Home";
 import PrescriptionDetails from "@/src/screens/PrescriptionDetails";
 import Prescriptions from "@/src/screens/Prescriptions";
-import { IRootStackNavigator } from "./types";
+import { ComponentType } from "react";
+import { IRootStackNavigator, RootStackParamList } from "./types";
 
-const RootStackScreens = {
-  Home,
-  Prescriptions,
-  PrescriptionDetails,
+type ScreenEntry = {
+  [K in keyof RootStackParamList]: {
+    component: ComponentType<any>;
+    title: string;
+  };
+};
+
+const RootStackScreens: ScreenEntry = {
+  Home: { component: Home, title: "Vitura Canview" },
+  Prescriptions: { component: Prescriptions, title: "My Prescriptions" },
+  PrescriptionDetails: {
+    component: PrescriptionDetails,
+    title: "Prescription Details",
+  },
 };
 
 type RootStackScreensSmokeTest = {
-  [K in keyof typeof RootStackScreens]: IRootStackNavigator;
+  [K in keyof RootStackParamList]: IRootStackNavigator;
 };
 
 const rootStackScreensSmokeTestData: RootStackScreensSmokeTest = {
