@@ -1,25 +1,12 @@
-import ButtonPrimary from "@/components/common/ButtonPrimary";
-import Text from "@/components/common/Text";
-import colors from "@/styles/colors";
-import constants from "@/styles/constants";
-import { useRouter } from "expo-router";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 
-export default function Index() {
-  const router = useRouter();
+export default function Page() {
   return (
     <View style={styles.container}>
-      <Text type="h1" style={styles.title}>
-        Welcome to Vitura
-      </Text>
-      <Text type="smallBody" style={styles.subtitle}>
-        Manage your prescriptions with ease
-      </Text>
-
-      <ButtonPrimary
-        label="View Prescriptions"
-        onPress={() => router.push("/prescriptions")}
-      />
+      <View style={styles.main}>
+        <Text style={styles.title}>Hello World</Text>
+        <Text style={styles.subtitle}>This is the first page of your app.</Text>
+      </View>
     </View>
   );
 }
@@ -27,18 +14,21 @@ export default function Index() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#F5F5F5",
     alignItems: "center",
+    padding: 24,
+  },
+  main: {
+    flex: 1,
     justifyContent: "center",
-    padding: constants.space.lg,
+    maxWidth: 960,
+    marginHorizontal: "auto",
   },
   title: {
-    color: colors.primaryOrange,
-    marginBottom: 12,
-    textAlign: "center",
+    fontSize: 64,
+    fontWeight: "bold",
   },
   subtitle: {
-    marginBottom: constants.space.xl,
-    textAlign: "center",
+    fontSize: 36,
+    color: "#38434D",
   },
 });

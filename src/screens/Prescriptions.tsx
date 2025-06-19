@@ -1,12 +1,12 @@
-import RadioButtonGroup from "@/components/common/RadioButonGroup";
-import SearchBar from "@/components/common/SearchBar";
-import PrescriptionListItem from "@/components/PrescriptionListItem";
-import SortAndClearControls from "@/components/prescriptions/SortAndClearControls";
-import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { fetchPrescriptions } from "@/store/thunks/prescriptionThunks";
-import colors from "@/styles/colors";
-import constants from "@/styles/constants";
-import array from "@/utils/array";
+import RadioButtonGroup from "@/src/components/common/RadioButonGroup";
+import SearchBar from "@/src/components/common/SearchBar";
+import PrescriptionListItem from "@/src/components/PrescriptionListItem";
+import SortAndClearControls from "@/src/components/prescriptions/SortAndClearControls";
+import { useAppDispatch, useAppSelector } from "@/src/store/hooks";
+import { fetchPrescriptions } from "@/src/store/thunks/prescriptionThunks";
+import colors from "@/src/styles/colors";
+import constants from "@/src/styles/constants";
+import array from "@/src/utils/array";
 import React, { useEffect, useMemo, useState } from "react";
 import {
   ActivityIndicator,
@@ -15,10 +15,12 @@ import {
   Text,
   View,
 } from "react-native";
+import Screen from "../components/common/Screen";
+import { RootStackScreenProps } from "../navigation/RootNavigator/types";
 
-type Props = {};
+type Props = RootStackScreenProps<"Prescriptions">;
 
-const Prescriptions: React.FC<Props> = () => {
+const Prescriptions: React.FC<Props> = ({ navigation }) => {
   const dispatch = useAppDispatch();
   const { prescriptions, loadingList, errorList } = useAppSelector(
     (state) => state.prescriptions
@@ -58,14 +60,14 @@ const Prescriptions: React.FC<Props> = () => {
     return (
       <ActivityIndicator
         size="large"
-        color="#0000ff"
+        color={colors.primaryOrange}
         style={styles.container}
       />
     );
   }
 
   return (
-    <View style={styles.container}>
+    <Screen scroll={false}>
       <RadioButtonGroup
         options={[
           { label: "All", value: "all" },
@@ -106,7 +108,7 @@ const Prescriptions: React.FC<Props> = () => {
           )
         }
       />
-    </View>
+    </Screen>
   );
 };
 

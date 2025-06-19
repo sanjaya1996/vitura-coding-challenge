@@ -1,0 +1,27 @@
+import colors from "@/src/styles/colors";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import RootStackScreens from "./RootStackScreens";
+import { RootStackParamList } from "./types";
+
+const RootStack = createNativeStackNavigator<RootStackParamList>();
+
+export default function RootNavigator() {
+  return (
+    <RootStack.Navigator
+      screenOptions={{
+        headerShown: true,
+        animation: "fade",
+        headerTintColor: colors.secondaryText,
+        headerStyle: { backgroundColor: colors.white },
+      }}
+    >
+      {Object.entries({ ...RootStackScreens }).map(([name, Component]) => (
+        <RootStack.Screen
+          key={name}
+          name={name as keyof RootStackParamList}
+          component={Component as React.ComponentType<any>}
+        />
+      ))}
+    </RootStack.Navigator>
+  );
+}

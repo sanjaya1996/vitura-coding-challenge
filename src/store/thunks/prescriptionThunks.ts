@@ -1,4 +1,4 @@
-import prescriptionsData from "@/data/prescriptions.json";
+import prescriptionsData from "@/src/data/prescriptions.json";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { Prescription } from "../slices/prescriptionSlice";
 

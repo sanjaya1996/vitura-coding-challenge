@@ -7,8 +7,8 @@ import {
   ViewStyle,
 } from "react-native";
 
-import Text from "@/components/common/Text";
-import constants from "@/styles/constants";
+import Text from "@/src/components/common/Text";
+import constants from "@/src/styles/constants";
 
 type Option = {
   label: string;

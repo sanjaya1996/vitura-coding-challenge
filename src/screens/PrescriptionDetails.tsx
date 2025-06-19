@@ -1,26 +1,31 @@
-import { useLocalSearchParams } from "expo-router";
 import { ActivityIndicator, StyleSheet, View } from "react-native";
 
-import Text from "@/components/common/Text";
-import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { fetchPrescriptionDetails } from "@/store/thunks/prescriptionThunks";
-import colors from "@/styles/colors";
-import constants from "@/styles/constants";
+import Text from "@/src/components/common/Text";
+import { useAppDispatch, useAppSelector } from "@/src/store/hooks";
+import { fetchPrescriptionDetails } from "@/src/store/thunks/prescriptionThunks";
+import colors from "@/src/styles/colors";
+import constants from "@/src/styles/constants";
 import { useEffect } from "react";
+import Screen from "../components/common/Screen";
+import { RootStackScreenProps } from "../navigation/RootNavigator/types";
 
-export default function PrescriptionDetail() {
+type Props = RootStackScreenProps<"PrescriptionDetails">;
+
+const PrescriptionDetails: React.FC<Props> = ({ route, navigation }) => {
   const dispatch = useAppDispatch();
-  const { id } = useLocalSearchParams<{ id: string }>();
+  const { prescriptionId } = route.params;
 
   const { prescriptionDetails, loadingDetails, errorDetails } = useAppSelector(
     (state) => state.prescriptions
   );
 
-  const prescription = id ? prescriptionDetails[id] : null;
+  const prescription = prescriptionId
+    ? prescriptionDetails[prescriptionId]
+    : null;
 
   useEffect(() => {
-    dispatch(fetchPrescriptionDetails(id));
-  }, [dispatch, id]);
+    dispatch(fetchPrescriptionDetails(prescriptionId));
+  }, [dispatch, prescriptionId]);
 
   if (loadingDetails) {
     return (
@@ -44,13 +49,15 @@ export default function PrescriptionDetail() {
   if (!prescription) {
     return (
       <View style={styles.centered}>
-        <Text type="smallBody">No prescription found for ID: {id}</Text>
+        <Text type="smallBody">
+          No prescription found for ID: {prescriptionId}
+        </Text>
       </View>
     );
   }
 
   return (
-    <View style={styles.container}>
+    <Screen>
       <Text type="h1" style={styles.title}>
         {prescription.patient}
       </Text>
@@ -91,14 +98,11 @@ export default function PrescriptionDetail() {
           {prescription.status.toUpperCase()}
         </Text>
       </View>
-    </View>
+    </Screen>
   );
-}
+};
 
 const styles = StyleSheet.create({
-  container: {
-    padding: constants.space.xMd,
-  },
   centered: {
     flex: 1,
     alignItems: "center",
@@ -113,3 +117,5 @@ const styles = StyleSheet.create({
     marginBottom: 12,
   },
 });
+
+export default PrescriptionDetails;

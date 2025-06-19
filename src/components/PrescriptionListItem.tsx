@@ -1,9 +1,10 @@
-import { Prescription } from "@/store/slices/prescriptionSlice";
+import { Prescription } from "@/src/store/slices/prescriptionSlice";
 import React, { useCallback } from "react";
 import { Pressable, StyleSheet } from "react-native";
 
-import constants from "@/styles/constants";
-import { router } from "expo-router";
+import constants from "@/src/styles/constants";
+import { useNavigation } from "@react-navigation/native";
+import { RootStackNavigationProps } from "../navigation/RootNavigator/types";
 import Text from "./common/Text";
 
 type Props = {
@@ -11,11 +12,16 @@ type Props = {
 };
 
 const PrescriptionListItem: React.FC<Props> = React.memo(({ item }) => {
+  const navigation = useNavigation<RootStackNavigationProps<"Prescriptions">>();
+
   const { medication, patient, status, id } = item;
 
   const handlePress = useCallback(() => {
-    router.push(`/prescriptions/${id}`);
-  }, [id]);
+    navigation.navigate("PrescriptionDetails", {
+      prescriptionId: id,
+    });
+  }, [navigation, id]);
+
   return (
     <Pressable style={styles.container} onPress={handlePress}>
       <Text type="smallBodyBold">{patient}</Text>
